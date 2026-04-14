@@ -3,11 +3,19 @@
 
 #include <Arduino.h>
 
+/**
+ * @class Led
+ * @brief Classe paraa controle não bloqueante de um LED.
+ * Permite ligar, deligar, ligar por tempo determinado,
+ * Piscar continuamente e piscar por quantidade definida.
+ *
+ * @note O método update() deve ser chamado continuamente dentro do loop().
+ */
 class Led
 {
 private:
     uint8_t pino;
-    bool estado; //atributo
+    bool estado; // atributo
     bool desligarPorTempo = false;
     uint32_t desligarNoMomento;
 
@@ -16,29 +24,82 @@ private:
     bool estadoPiscar;
     uint16_t repeticoes;
 
+    /**
+     * @brief Processa a lógica de piscada do LED.
+     */
     void funcaopiscar();
+
+    /**
+     * @brief Processa o desligamento temporizado  .
+     */
     void funcaoDesligamento();
 
 public:
-    Led(uint8_t pin); // Método contrutor, deverá ter o mesmo nome da classe
+    /**
+     * @brief Constroi um objeto LED.
+     * @param pin Número do pino digital onde o LED está conectado.
+     */
+    Led(uint8_t pin);
 
-    void ligar(); //OK
+    /**
+     * @brief Liga o LED continuamente.
+     */
+    void ligar();
+
+    /**
+     * @brief Liga o LED por um tempo determinado.
+     * @param tempoligado_ms Tempo, em milissegundos, que o LED ficará ligado.
+     */
     void ligar(unsigned long tempoligado_ms);
 
-    void desligar(); //OK
+    /**
+     * @brief Desliga o LED e cancela os modos automáticos.
+     */
+    void desligar();
 
-    void piscar(); //OK
+    /**
+     * @brief Inicia a piscada contínua em 1Hz
+     */
+    void piscar();
+
+    /**
+     * @brief Pisca o LED em uma determinada frequência.
+     * @param Frequência da piscada em hertz.
+     */
     void piscar(float frequencia);
+
+    /**
+     * @brief Pisca o LED uma quantidade definida de vezes.
+     * @param frequencia Frequência da piscada em hertz.
+     * @param repeticoes Quantidade de piscadas completas.
+     */
     void piscar(float frequencia, uint16_t repeticoes);
 
-    bool getEstado(); //OK
-    uint8_t getPino(); //OK
+    /**
+     * @brief Retorna o estado do LED.
+     */
+    bool getEstado();
 
+    /**
+     * @brief Retorna o pino do LED.
+     */
+    uint8_t getPino();
+
+    /**
+     * @brief Define manualmente o estado do LED.
+     * @param estado true para ligado, false para desligado.
+     */
     void setEstado(bool estado);
 
-    void alternar(); //OK
-    
-    void update(); //OK
+    /**
+     * @brief Alterna o estado do LED.
+     */
+    void alternar(); // OK
+
+    /**
+     * @brief Atualiza as saidas
+     */
+    void update(); // OK
 };
 
 #endif
