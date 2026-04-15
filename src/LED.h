@@ -94,12 +94,12 @@ public:
     /**
      * @brief Alterna o estado do LED.
      */
-    void alternar(); // OK
+    void alternar(); 
 
     /**
      * @brief Atualiza as saidas
      */
-    void update(); // OK
+    void update(); 
 };
 
 #endif
